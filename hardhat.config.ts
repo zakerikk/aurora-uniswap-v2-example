@@ -95,7 +95,7 @@ const config: HardhatUserConfig = {
     },
   },
   mocha: {
-    timeout: 40000,
+    timeout: 60000,
     bail: true,
   },
   tenderly: {
@@ -115,11 +115,70 @@ const config: HardhatUserConfig = {
       },
       {
         version: "0.5.16",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
       },
       {
         version: "0.6.6",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
       },
     ],
+    overrides: {
+      "contracts/AuroraToken.sol": {
+        version: "0.8.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 9000,
+          },
+        },
+      },
+      "@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+        version: "0.8.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 9000,
+          },
+        },
+      },
+      "@openzeppelin/contracts/utils/Context.sol": {
+        version: "0.8.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 9000,
+          },
+        },
+      },
+      "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+        version: "0.8.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 9000,
+          },
+        },
+      },
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+        version: "0.8.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 9000,
+          },
+        },
+      },
+    },
   },
 };
 
