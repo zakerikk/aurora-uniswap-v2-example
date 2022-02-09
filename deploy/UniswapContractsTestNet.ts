@@ -30,6 +30,11 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     log: true,
   });
 
+  await deploy("WETH9Mock", {
+    from: deployer,
+    log: true,
+  });
+
   await deploy("UniswapV2Pair", {
     from: deployer,
     log: true,

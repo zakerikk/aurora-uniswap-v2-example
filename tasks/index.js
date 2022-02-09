@@ -13,9 +13,9 @@ const overrides = {
 
 async function addLiquidity(AuroraAmount, WETHAmount) {
   const AURORA_TOKEN = await ethers.getContractAt("AuroraToken", "0xf06c68af82a938f9a737484f4073bf89a5edb271");
-  const WETH_TOKEN = await ethers.getContractAt("AuroraToken", "0xe447Bb3b10112B2481327CC8345574eB43A738c9");
+  const WETH_TOKEN = await ethers.getContractAt("AuroraToken", "0xF7C427b03bF5774660A64b03F89170675dAc0382");
   // const wallet = new ethers.Wallet(process.env.AURORA_PRIVATE_KEY, ethers.provider)
-  const router = await ethers.getContractAt("UniswapV2Router02", "0x7397fA11B3025B268f50Bdd5E354fF86E03040aC");
+  const router = await ethers.getContractAt("UniswapV2Router02", "0x0ec1f2fA6DfA35aA0A4D231a9806640273677Bd7");
   await AURORA_TOKEN.approve(router.address, constants.MaxUint256)
   await delay(1000)
   await WETH_TOKEN.approve(router.address, constants.MaxUint256)
@@ -64,7 +64,17 @@ task("AURORA/WETH_create_pair", "create pair")
 
     await UniswapV2Factory.createPair(
       "0xf06c68af82a938f9a737484f4073bf89a5edb271", // AURORA
-      "0xe447Bb3b10112B2481327CC8345574eB43A738c9", // WETH
+      "0xF7C427b03bF5774660A64b03F89170675dAc0382", // WETH
+    )
+  });
+
+task("AURORA/ZAK_create_pair", "create pair")
+  .setAction(async taskArgs => {
+    const UniswapV2Factory = await ethers.getContractAt("UniswapV2Factory", "0xeF2c140F2E9c05A121C60b693850D2969fd3730c");
+
+    await UniswapV2Factory.createPair(
+      "0xf06c68af82a938f9a737484f4073bf89a5edb271", // AURORA
+      "0xF7C427b03bF5774660A64b03F89170675dAc0382", // ZAK
     )
   });
 
@@ -101,7 +111,7 @@ task("balance", "get feeTo address")
 
 task("addLiquidity", "get feeTo address")
   .setAction(async taskArgs => {
-    const AuroraAmount = expandTo18Decimals(5).mul(100).div(99)
+    const AuroraAmount = expandTo18Decimals(5)
     const WETHAmount = expandTo18Decimals(10)
 
     console.log("result: ", await addLiquidity(AuroraAmount, WETHAmount))
@@ -118,7 +128,7 @@ task("addLiquidity", "get feeTo address")
 
 //     await DTT.approve(router.address, MaxUint256)
 
-//     const UniswapV2Factory = await ethers.getContractAt("UniswapV2Router02", "0x7397fA11B3025B268f50Bdd5E354fF86E03040aC");
+//     const UniswapV2Factory = await ethers.getContractAt("UniswapV2Router02", "0x0ec1f2fA6DfA35aA0A4D231a9806640273677Bd7");
 
 //     await router.swapExactTokensForTokensSupportingFeeOnTransferTokens(
 //       amountIn,
