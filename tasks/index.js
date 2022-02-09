@@ -13,7 +13,7 @@ const overrides = {
 
 async function addLiquidity(AuroraAmount, WETHAmount) {
   const AURORA_TOKEN = await ethers.getContractAt("AuroraToken", "0xf06c68af82a938f9a737484f4073bf89a5edb271");
-  const WETH_TOKEN = await ethers.getContractAt("AuroraToken", "0xF7C427b03bF5774660A64b03F89170675dAc0382");
+  const WETH_TOKEN = await ethers.getContractAt("AuroraToken", "0xe447Bb3b10112B2481327CC8345574eB43A738c9");
   // const wallet = new ethers.Wallet(process.env.AURORA_PRIVATE_KEY, ethers.provider)
   const router = await ethers.getContractAt("UniswapV2Router02", "0x0ec1f2fA6DfA35aA0A4D231a9806640273677Bd7");
   await AURORA_TOKEN.approve(router.address, constants.MaxUint256)
