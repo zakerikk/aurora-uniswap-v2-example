@@ -17,17 +17,14 @@ async function addLiquidity(AuroraAmount, WETHAmount) {
   // const wallet = new ethers.Wallet(process.env.AURORA_PRIVATE_KEY, ethers.provider)
   const router = await ethers.getContractAt("UniswapV2Router02", "0x7397fA11B3025B268f50Bdd5E354fF86E03040aC");
   await AURORA_TOKEN.approve(router.address, constants.MaxUint256)
-  await delay(2000)
+  await delay(1000)
   await WETH_TOKEN.approve(router.address, constants.MaxUint256)
-  await delay(2000)
-
-  console.log('constants.MaxUint256', constants.MaxUint256)
+  await delay(1000)
 
   const currentBlock = await ethers.provider.getBlock("latest")
+  console.log('currentBlock', currentBlock)
 
-  console.log('2', currentBlock)
-
-  console.log('1', await router.addLiquidity(
+  console.log('addLiquidity', await router.addLiquidity(
     AURORA_TOKEN.address,
     WETH_TOKEN.address,
     AuroraAmount,
@@ -35,7 +32,8 @@ async function addLiquidity(AuroraAmount, WETHAmount) {
     AuroraAmount,
     WETHAmount,
     "0x23a824dD17d6571e1BAdd25A6247C685D6802985",
-    currentBlock.timestamp + 10000,
+    constants.MaxUint256,
+    // currentBlock.timestamp + 10000,
     overrides
   ))
 }
@@ -104,7 +102,7 @@ task("balance", "get feeTo address")
 task("addLiquidity", "get feeTo address")
   .setAction(async taskArgs => {
     const AuroraAmount = expandTo18Decimals(5).mul(100).div(99)
-    const WETHAmount = expandTo18Decimals(5)
+    const WETHAmount = expandTo18Decimals(10)
 
     console.log("result: ", await addLiquidity(AuroraAmount, WETHAmount))
   });
