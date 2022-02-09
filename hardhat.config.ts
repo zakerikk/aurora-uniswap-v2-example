@@ -79,7 +79,7 @@ const config: HardhatUserConfig = {
       tags: ["test", "local"],
     },
     testnet_aurora: {
-      url: 'https://testnet.aurora.dev',
+      url: 'https://testnet.aurora.dev/HSoAyiYyAndmGPoewdGCw2sCndjBVAEkXGyQEvnmBxLy',
       chainId: 1313161555,
       accounts,
       live: false,

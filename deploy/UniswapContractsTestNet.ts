@@ -39,6 +39,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     from: deployer,
     log: true,
   });
+
+  const UniswapV2Pair = await ethers.getContract("UniswapV2Pair")
+
+  await UniswapV2Pair.initialize("0xf06c68af82a938f9a737484f4073bf89a5edb271", "0xe447Bb3b10112B2481327CC8345574eB43A738c9")
+
+
 };
 
 export default func;
