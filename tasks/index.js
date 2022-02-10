@@ -13,12 +13,13 @@ const overrides = {
 
 async function addLiquidity(AuroraAmount, WETHAmount) {
   const AURORA_TOKEN = await ethers.getContractAt("AuroraToken", "0xf06c68af82a938f9a737484f4073bf89a5edb271");
-  const WETH_TOKEN = await ethers.getContractAt("AuroraToken", "0xF7C427b03bF5774660A64b03F89170675dAc0382");
+  // const WETH_TOKEN = await ethers.getContractAt("AuroraToken", "0xF7C427b03bF5774660A64b03F89170675dAc0382");
+  const ZAK_TOKEN = await ethers.getContractAt("AuroraToken", "0x1eFC73F83146f386B1395A79D07b92bfb8f865C9");
   // const wallet = new ethers.Wallet(process.env.AURORA_PRIVATE_KEY, ethers.provider)
-  const router = await ethers.getContractAt("UniswapV2Router02", "0x0ec1f2fA6DfA35aA0A4D231a9806640273677Bd7");
+  const router = await ethers.getContractAt("UniswapV2Router02", "0x85532bbB920301b2493af05675eA1da5fe299E10");
   await AURORA_TOKEN.approve(router.address, constants.MaxUint256)
   await delay(1000)
-  await WETH_TOKEN.approve(router.address, constants.MaxUint256)
+  await ZAK_TOKEN.approve(router.address, constants.MaxUint256)
   await delay(1000)
 
   const currentBlock = await ethers.provider.getBlock("latest")
@@ -26,7 +27,7 @@ async function addLiquidity(AuroraAmount, WETHAmount) {
 
   console.log('addLiquidity', await router.addLiquidity(
     AURORA_TOKEN.address,
-    WETH_TOKEN.address,
+    ZAK_TOKEN.address,
     AuroraAmount,
     WETHAmount,
     AuroraAmount,
@@ -112,7 +113,7 @@ task("balance", "get feeTo address")
 task("addLiquidity", "get feeTo address")
   .setAction(async taskArgs => {
     const AuroraAmount = expandTo18Decimals(5)
-    const WETHAmount = expandTo18Decimals(10)
+    const WETHAmount = expandTo18Decimals(5)
 
     console.log("result: ", await addLiquidity(AuroraAmount, WETHAmount))
   });

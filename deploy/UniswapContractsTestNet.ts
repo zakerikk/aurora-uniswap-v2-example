@@ -20,7 +20,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     from: deployer,
     args: [
       UniswapV2Factory.address,
-      "0xe447Bb3b10112B2481327CC8345574eB43A738c9", // WETH
+      "0xCeDa937fcAC1AE545453916A946B27AFbB9B41EA", // WETH
     ],
     log: true,
   });
@@ -31,6 +31,11 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   });
 
   await deploy("WETH9Mock", {
+    from: deployer,
+    log: true,
+  });
+
+  await deploy("WETH", {
     from: deployer,
     log: true,
   });
